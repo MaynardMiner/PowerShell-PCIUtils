@@ -20,7 +20,7 @@ Repository for pci-ids:
 
 https://pci-ids.ucw.cz/
 
-INSTRUCTIONS
+## INSTRUCTIONS
 
 To run basic lspci, simply run the .bat file.
 
