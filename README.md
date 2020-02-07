@@ -1,5 +1,5 @@
-# PowerShell-PCIUtils
-PCIUtils - Built With Powershell
+# PowerShell-pciutils
+pciutils - Built With Powershell
 
 Current commands available:
 
