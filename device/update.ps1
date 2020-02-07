@@ -22,24 +22,26 @@ If you find it useful - Consider a BTC donation: 1FpuMha1QPaWS4PTPZpU1zGRzKMevnD
 ## a class used for lspci.ps1
 
 $code = @()
-$Code += "Class PCI_ID {"
-$Code += "`t[Hashtable]`$Info= @{"
-$A = Get-Content ".\build\apps\device\pci.ids" | Where { $_[0] -ne '#' -and $_ -ne "" }
+$code += "Class PCI_ID {"
+$code += "`t[Hashtable]`$Info= @{"
+$pci_ids = Get-Content ".\build\apps\device\pci.ids" | Where { $_[0] -ne '#' -and $_ -ne "" }
 
-$B = $A | Select -First 1
-$name = $B.substring(4 + 2)
-$vendor_id = $B.substring(0, 4)
+## Build from first line of pci_ids
+## First line will never change
+$first = $pci_ids | Select -First 1
+$name = $first.substring(4 + 2)
+$vendor_id = $first.substring(0, 4)
 $vendor = "`"$vendor_id   $name`""
-$Code += "`t`t$vendor = @{"
+$code += "`t`t$vendor = @{"
 
 $tab1 = $true
 $tab2 = $false
 $tab3 = $false
 
-$A = $A | Select -Skip 1
+$pci_ids = $pci_ids | Select -Skip 1
 
 ## Do first line
-$A | % {
+$pci_ids | % {
     if ($_[0] -ne "`t") {
         $name = $_.substring(4 + 2)
         $vendor_id = $_.substring(0, 4)
@@ -60,7 +62,7 @@ $A | % {
         $tab1 = $true
         $tab2 = $false
         $tab3 = $false
-        $Code += "`t`t$vendor = @{"
+        $code += "`t`t$vendor = @{"
     }
     elseif ($_[0] -eq "`t" -and $_[1] -ne "`t") {
         $flag = $false
@@ -106,7 +108,7 @@ $A | % {
 
 $count = $code.count
 $code[$count - 1] += "}"
-$Code += "`t}"
-$Code += "}"
+$code += "`t}"
+$code += "}"
 
 $code | Set-Content ".\build\apps\device\pci_ids.ps1"
