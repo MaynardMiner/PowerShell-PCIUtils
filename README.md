@@ -27,4 +27,4 @@ To run basic lspci, simply run the .bat file.
 If you wish to run with argument -vmms, open cmd and navigate
 to directory. You can then run lspci -vmms [busnumber]
 
-You can also just set PATH to include this directory, and you can run strait from CMD.exe
+You can also just set PATH to include this directory, and you can run straight from CMD.exe
