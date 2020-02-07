@@ -8,7 +8,7 @@ lspci (basic command)
 lspci -vmms [busid] 
 ```
 
-Gathers PCI information based on registry key entries. If you would like more commands available- post an issue.
+Gathers PCI information based on registry entries. If you would like more commands available- post an issue.
 
 If you ever need to update pci.ids
 Simply place latest pci.ids in device folders
