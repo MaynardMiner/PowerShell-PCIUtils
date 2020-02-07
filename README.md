@@ -13,7 +13,12 @@ Gathers PCI information based on registry entries. If you would like more comman
 If you ever need to update pci.ids
 Simply place latest pci.ids in device folders
 and run update script. It will generate a
-a class used for lspci.ps1
+a class used for lspci.ps1- It will build
+the code for you!
+
+Repository for pci-ids:
+
+https://pci-ids.ucw.cz/
 
 INSTRUCTIONS
 
