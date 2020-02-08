@@ -21,9 +21,12 @@ If you find it useful - Consider a BTC donation: 1FpuMha1QPaWS4PTPZpU1zGRzKMevnD
 ## and run this script. It will generate a
 ## a class used for lspci.ps1
 
+## Build initial code for class
 $code = @()
 $code += "Class PCI_ID {"
 $code += "`t[Hashtable]`$Info= @{"
+
+## Pull pci.ids file, but remove all comments and empty lines
 $pci_ids = Get-Content ".\build\apps\device\pci.ids" | Where { $_[0] -ne '#' -and $_ -ne "" }
 
 ## Build from first line of pci_ids
@@ -34,13 +37,15 @@ $vendor_id = $first.substring(0, 4)
 $vendor = "`"$vendor_id   $name`""
 $code += "`t`t$vendor = @{"
 
+## Add simple bools to act as switches
 $tab1 = $true
 $tab2 = $false
 $tab3 = $false
 
+## Skip first line to...
 $pci_ids = $pci_ids | Select -Skip 1
 
-## Do first line
+## ...Do remaining lines
 $pci_ids | % {
     if ($_[0] -ne "`t") {
         $name = $_.substring(4 + 2)
@@ -106,9 +111,11 @@ $pci_ids | % {
     }
 }
 
+## Add ending braces
 $count = $code.count
 $code[$count - 1] += "}"
 $code += "`t}"
 $code += "}"
 
+## Set to file
 $code | Set-Content ".\build\apps\device\pci_ids.ps1"
