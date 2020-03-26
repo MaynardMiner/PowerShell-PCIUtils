@@ -120,7 +120,10 @@ foreach ($Device in $Devices) {
     $Code_Id = $CC.Substring(2, 2)
     $title = $pci_id.info.keys | Where { $_.substring(0, 4) -eq "C $Code" }
     if ($pci_id.info.$title.keys) {
-        $title = $pci_id.info.$title.keys | Where { $_.substring(0, 2) -eq $Code_Id }
+        $get_title = $pci_id.info.$title.keys | Where { $_.substring(0, 2) -eq $Code_Id }
+        if($get_title) {
+            $title = $get_title
+        }
     }
 
     if ($null -eq $vendor) {
